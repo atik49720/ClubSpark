@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,24 @@ use App\Http\Controllers\MemberController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/member-login', [MemberController::class, 'index']);
+Route::get('/member-register', [MemberController::class, 'create']);
+Route::get('/member-dashboard', [MemberController::class, 'show']);
+
+Route::post('/memberLogin', [MemberController::class, 'login'])->name('memberLogin');
+Route::post('/memberRegister', [MemberController::class, 'store'])->name('memberRegister');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/member', [MemberController::class, 'show']);
+require __DIR__.'/auth.php';
+

@@ -13,7 +13,16 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
+            $table->string('username');
+            $table->string('password');
             $table->string('name');
+            $table->integer('mobile');
+            $table->string('email');
+            $table->integer('batch');
+            $table->string('dept');
+            $table->boolean('isApproved')->default(0);
+            $table->integer('approvedBy')->nullable();
+            $table->dateTime('approvedAt')->nullable();
             $table->timestamps();
         });
     }

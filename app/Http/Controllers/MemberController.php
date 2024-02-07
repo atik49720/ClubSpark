@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
 {
@@ -12,7 +13,20 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        return view('member.auth.login');
+    }
+    public function login(Request $request)
+    {
+
+        $results = DB::table('members')->where('username', $request['username'])->first();
+        if(isset($results)){
+            if($request['password'] == $results->password){
+                return redirect('./member-dashboard');
+            }
+
+        }
+        return redirect('./');
+
     }
 
     /**
@@ -20,7 +34,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('member.auth.register');
     }
 
     /**
@@ -28,7 +42,21 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request->all());
+
+        $member = new member();
+
+        $member->username = $request['username'];
+        $member->password = $request['password'];
+        $member->name = $request['name'];
+        $member->mobile = $request['mobile'];
+        $member->email = $request['email'];
+        $member->batch = $request['batch'];
+        $member->dept = $request['dept'];
+
+        $member->save();
+
+        return redirect('./member-login');
     }
 
     /**
@@ -36,8 +64,7 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        $result = Member::all();
-        return view('atik',compact('result'));
+        return view('member.dashboard');
     }
 
     /**
