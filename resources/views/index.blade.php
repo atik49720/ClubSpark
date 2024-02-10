@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <!-- Basic card section start -->
+    <!-- Basic card section start test-->
     <section id="content-types">
         <div class="row">
 
