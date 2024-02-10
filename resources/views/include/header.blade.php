@@ -73,7 +73,6 @@
                 <nav class="main-navbar">
                     <div class="container">
                         <ul>
-
                             <li
                                 class="menu-item  ">
                                 <a href="./" class='menu-link'>
@@ -90,8 +89,6 @@
                                     class="submenu ">
                                     <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
                                     <div class="submenu-group-wrapper">
-
-
                                         <ul class="submenu-group">
 
                                             <li
@@ -145,24 +142,16 @@
                                                 </ul>
 
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  ">
                                                 <a href="ui-file-uploader.html"
                                                     class='submenu-link'>File Uploader</a>
 
-
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  has-sub">
                                                 <a href="#"
                                                     class='submenu-link'>Maps</a>
-
 
                                                 <!-- 3 Level Submenu -->
                                                 <ul class="subsubmenu">
@@ -178,50 +167,30 @@
                                                 </ul>
 
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  ">
                                                 <a href="application-email.html"
                                                     class='submenu-link'>Email Application</a>
 
-
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  ">
                                                 <a href="application-chat.html"
                                                     class='submenu-link'>Chat Application</a>
 
-
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  ">
                                                 <a href="application-gallery.html"
                                                     class='submenu-link'>Photo Gallery</a>
 
-
                                             </li>
-
-
-
                                             <li
                                                 class="submenu-item  ">
                                                 <a href="application-checkout.html"
                                                     class='submenu-link'>Checkout Page</a>
-
-
                                             </li>
-
                                         </ul>
-
-
                                     </div>
                                 </div>
                             </li>
@@ -233,4 +202,3 @@
             </header>
             <div class="content-wrapper container">
                 <div class="page-heading">
-

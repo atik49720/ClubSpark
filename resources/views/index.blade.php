@@ -12,6 +12,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="./">ClubSpark</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Home</li>
+
                     </ol>
                 </nav>
             </div>
@@ -20,7 +21,6 @@
     <!-- Basic card section start test-->
     <section id="content-types">
         <div class="row">
-
             <div class="col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-content">

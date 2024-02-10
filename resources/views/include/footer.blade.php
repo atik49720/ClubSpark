@@ -26,5 +26,4 @@
 <script src="{{'public/assets/static/js/pages/dashboard.js'}}"></script>
 
 </body>
-
 </html>
