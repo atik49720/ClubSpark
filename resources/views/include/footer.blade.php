@@ -4,11 +4,11 @@
     <div class="container">
         <div class="footer clearfix mb-0 text-muted">
             <div class="float-start">
-                <p>2023 &copy; Mazer</p>
+                <p>{{date('Y')}} &copy; ClubSpark by <a href="https://github.com/atik49720" target="_blank">@atik49720</a>
+                    & <a href="https://github.com/ImtiazAhmedAkash" target="_blank">@ImtiazAhmedAkash</a></p>
             </div>
             <div class="float-end">
-                <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                    href="https://saugi.me">Saugi</a></p>
+                <p>Crafted by <a href="https://saugi.me" target="_blank">Saugi</a></p>
             </div>
         </div>
     </div>
