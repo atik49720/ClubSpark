@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ClubsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [ClubsController::class, 'index']);
 Route::get('/member-login', [MemberController::class, 'index']);
 Route::get('/member-register', [MemberController::class, 'create']);
 Route::get('/member-dashboard', [MemberController::class, 'show']);

@@ -17,8 +17,8 @@ class MemberController extends Controller
     }
     public function login(Request $request)
     {
-
-        $results = DB::table('members')->where('username', $request['username'])->first();
+        $results = Member::all()->where('username',$request['password'])->first();
+        //$results = DB::table('members')->where('username', $request['username'])->first();
         if(isset($results)){
             if($request['password'] == $results->password){
                 return redirect('./member-dashboard');
