@@ -6,7 +6,7 @@ use App\Models\Clubs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ClubsController extends Controller
+class ClubController extends Controller
 {
     /**
      * Display a listing of the resource.
