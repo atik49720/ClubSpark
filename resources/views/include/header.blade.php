@@ -46,21 +46,42 @@
                                 </svg>
                             </div>
                             <div class="dropdown">
+                                @if(isset(auth()->user()->id))
                                 <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar avatar-md2" >
-                                        <img src="{{'public/assets/compiled/jpg/1.jpg'}}" alt="Avatar">
+                                        <img src="{{'public/assets/compiled/png/avatar.png'}}" alt="Avatar">
                                     </div>
                                     <div class="text">
-                                        <h6 class="user-dropdown-name">John Ducky</h6>
+                                        <h6 class="user-dropdown-name">
+                                            {{auth()->user()->name}}
+                                        </h6>
                                         <p class="user-dropdown-status text-sm text-muted">Member</p>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
-                                  <li><a class="dropdown-item" href="#">My Account</a></li>
-                                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                                  <li><hr class="dropdown-divider"></li>
-                                  <li><a class="dropdown-item" href="auth-login.html">Logout</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="./profile">Profile</a></li>
+                                    <form method="post" action="{{ route('logout') }}">
+                                        @csrf
+                                        <li><button type="submit" class="dropdown-item btn btn-link">Logout</button></li>
+                                    </form>
                                 </ul>
+                                @else
+                                <a href="#" id="topbarUserDropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle " data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar avatar-md2" >
+                                            <img src="{{'public/assets/compiled/png/avatar.png'}}" alt="Avatar">
+                                        </div>
+                                        <div class="text">
+                                            <h6 class="user-dropdown-name">
+                                               My Account
+                                            </h6>
+                                        </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Register</a></li>
+                                </ul>
+                                @endif
                             </div>
 
                             <!-- Burger button responsive -->
