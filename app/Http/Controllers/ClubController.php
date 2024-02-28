@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clubs;
+use App\Models\Club;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,7 @@ class ClubController extends Controller
      */
     public function index()
     {
-        $results = Clubs::all();
+        $results = Club::all();
         //$results = DB::table('clubs')->get();
 
         return view('index', compact('results'));
@@ -38,15 +39,38 @@ class ClubController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Clubs $clubs)
+    public function show($clubAlias)
     {
-        //
+        $results = Club::all()->where('alias',$clubAlias)->first();
+        if(isset($results)){
+            var_dump($results);
+            //return view('club.profile',compact($results));
+        }
+        else{
+            return redirect('./');
+        }
+    }
+
+    public function api($key,$clubAlias){
+        if ($key=="amiatik"){
+            $results = Club::all()->where('alias',$clubAlias)->first();
+            if(isset($results)){
+                //return view('club.profile',compact($results));
+                return response()->json($results);
+            }
+            else{
+                return response()->json(["Not Found"]);
+            }
+        }
+        else{
+            return response()->json(["Not Authorized"]);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Clubs $clubs)
+    public function edit(Club $club)
     {
         //
     }
@@ -54,7 +78,7 @@ class ClubController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Clubs $clubs)
+    public function update(Request $request, Club $club)
     {
         //
     }
@@ -62,7 +86,7 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clubs $clubs)
+    public function destroy(Club $club)
     {
         //
     }
