@@ -1,4 +1,5 @@
 @include('./../include/header')
+<title>Login - ClubSpark</title>
 <section id="basic-vertical-layouts">
     <div class="row match-height">
         <div class="col-md-6 col-12">

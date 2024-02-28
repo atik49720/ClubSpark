@@ -33,7 +33,7 @@
                                 <p class="card-text">
                                     {{$result->intro}}
                                 </p>
-                                <button class="btn btn-primary block">Show Details</button>
+                                <button class="btn btn-primary block"><a style="color: white;" href="./club-profile/{{$result->alias}}">Show Profile</a></button>
                             </div>
                         </div>
                     </div>
