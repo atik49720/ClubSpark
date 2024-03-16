@@ -115,6 +115,21 @@
                                         <span><i class="bi bi-grid-fill"></i> Dashboard</span>
                                     </a>
                                 </li>
+                                <li class="menu-item  has-sub">
+                                    <a href="#" class="menu-link">
+                                        <span><i class="bi bi-file-earmark-medical-fill"></i> Club </span>
+                                    </a>
+                                    <div class="submenu ">
+                                        <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+                                        <div class="submenu-group-wrapper">
+                                            <ul class="submenu-group">
+                                                <li class="submenu-item  ">
+                                                    <a href="./club-list" class="submenu-link">Club List</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
                             @endif
 
                         </ul>

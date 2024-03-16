@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Club;
 use App\Models\Member;
+use App\Models\Place;
+use App\Models\PlaceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ClubController extends Controller
 {
@@ -18,6 +21,13 @@ class ClubController extends Controller
         //$results = DB::table('clubs')->get();
 
         return view('index', compact('results'));
+    }
+    public function list()
+    {
+        $results = Club::all();
+        //$results = DB::table('clubs')->get();
+
+        return view('club.list', compact('results'));
     }
 
     /**
@@ -33,7 +43,48 @@ class ClubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50'
+        ]);
+        $Club = new Club();
+        $Club->name = $request['name'];
+        $Club->alias = $request['alias'];
+        $Club->dept = $request['dept'];
+        $Club->room = $request['room'];
+        $Club->fbPageURL = $request['fbPageURL'];
+        $Club->fbGroupURL = $request['fbGroupURL'];
+        $Club->intro = $request['intro'];
+        $Club->objective = $request['objective'];
+        $Club->committee = $request['committee'];
+
+        $folder = "club/images";
+
+        $file = $request->file('mainImage');
+        $path = Storage::disk('public_uploads')->put($folder, $file);
+        if(!isset($path)) {
+            return false;
+        }
+        $Club->mainImage = "public/uploads/".$path;
+
+        $multipleImages = [];
+        if($request->hasFile('achievements'))
+        {
+            $i=0;
+            foreach ($request->file('achievements') as $achievementImage){
+                $path = Storage::disk('public_uploads')->put($folder, $achievementImage);
+                if(!isset($path)) {
+                    return false;
+                }
+                $multipleImages[$i] = "public/uploads/".$path;
+                $i++;
+            }
+        }
+        $Club->achievements = implode(', ', $multipleImages);
+
+        $Club->createdBy = auth()->user()->id;
+        $Club->updatedBy = auth()->user()->id;
+        $Club->save();
+        return redirect()->back()->with('Success', 'Club created successfully!');
     }
 
     /**
@@ -86,8 +137,9 @@ class ClubController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Club $club)
+    public function destroy(Request $request)
     {
-        //
+        Club::where('id', $request['id'])->delete();
+        return redirect()->back()->with('success', 'Club deleted successfully!');
     }
 }

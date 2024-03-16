@@ -17,11 +17,15 @@ return new class extends Migration
             $table->string('alias');
             $table->string('dept');
             $table->integer('room');
+            $table->string('fbPageURL')->nullable();
+            $table->string('fbGroupURL')->nullable();
             $table->string('intro');
-            $table->string('objective');
+            $table->text('objective');
             $table->string('committee');
-            $table->string('achievements');
             $table->string('mainImage');
+            $table->text('achievements')->nullable();
+            $table->integer('createdBy');
+            $table->integer('updatedBy');
             $table->timestamps();
         });
     }
