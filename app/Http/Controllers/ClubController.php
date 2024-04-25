@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Club;
-use App\Models\Member;
-use App\Models\Place;
-use App\Models\PlaceType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ClubController extends Controller
@@ -92,10 +88,10 @@ class ClubController extends Controller
      */
     public function show($clubAlias)
     {
-        $results = Club::all()->where('alias',$clubAlias)->first();
-        if(isset($results)){
-            var_dump($results);
-            //return view('club.profile',compact($results));
+        $result = Club::all()->where('alias',$clubAlias)->first();
+        if(isset($result)){
+            //var_dump($result);
+            return view('club.profile',compact('result'));
         }
         else{
             return redirect('./');

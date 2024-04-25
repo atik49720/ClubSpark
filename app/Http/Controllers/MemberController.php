@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Club;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,13 @@ class MemberController extends Controller
     public function index()
     {
         return view('member.auth.login');
+    }
+    public function list()
+    {
+        $results = Member::all();
+        //$results = DB::table('clubs')->get();
+
+        return view('member.list', compact('results'));
     }
     public function login(Request $request)
     {
@@ -86,8 +94,9 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Member $member)
+    public function destroy(Request $request)
     {
-        //
+        Member::where('id', $request['id'])->delete();
+        return redirect()->back()->with('success', 'Member deleted successfully!');
     }
 }
