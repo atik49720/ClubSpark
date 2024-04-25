@@ -1,11 +1,11 @@
-@include('../../../include/header')
-<title>Club List - ClubSpark</title>
+@include('/../include/header')
+<title>Member List - ClubSpark</title>
 <section class="section">
     <div class="row" id="table-head">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Club List</h4>
+                    <h4 class="card-title">Member List</h4>
                     <div class="me-1 mb-1 d-inline-block">
                         <!-- Button trigger for Extra Large  modal -->
                         <button type="button" class="btn btn-sm btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#xlarge">
@@ -116,10 +116,12 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>SL</th>
-                            <th>Name</th>
-                            <th>Alias</th>
+                            <th>User ID</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Batch</th>
                             <th>Dept</th>
-                            <th>Updated By</th>
+                            <th>Approved?</th>
                             <th>Updated At</th>
                             <th>Action</th>
                         </tr>
@@ -129,13 +131,15 @@
                         @foreach($results as $result)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $result['name'] }}</td>
-                                <td>{{ $result['alias'] }}</td>
+                                <td>{{ $result['userId'] }}</td>
+                                <td>{{ $result['mobile'] }}</td>
+                                <td>{{ $result['email'] }}</td>
+                                <td>{{ $result['batch'] }}</td>
                                 <td>{{ $result['dept'] }}</td>
-                                <td>{{ $result['updatedBy'] }}</td>
+                                <td>{{ $result['isApproved'] }}</td>
                                 <td>{{ $result['updated_at'] }}</td>
                                 <td>
-                                    <form method="POST" action="./club-delete">
+                                    <form method="POST" action="./member-delete">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$result['id']}}">
                                         <button class="btn btn-danger" type="submit">Delete</button>

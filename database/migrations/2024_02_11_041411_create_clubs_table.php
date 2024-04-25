@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('room');
             $table->string('fbPageURL')->nullable();
             $table->string('fbGroupURL')->nullable();
-            $table->string('intro');
+            $table->text('intro');
             $table->text('objective');
             $table->string('committee');
             $table->string('mainImage');

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClubController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/club-list', [ClubController::class, 'list']);
     Route::post('/club-create', [ClubController::class, 'store']);
     Route::post('/club-delete', [ClubController::class, 'destroy']);
+
+    Route::get('/club-forum/{clubAlias}', [ForumController::class, 'index']);
+    Route::get('/club-forum/{clubAlias}/{questionId}', [ForumController::class, 'details']);
+
+    Route::get('/member-list', [MemberController::class, 'list']);
+    Route::post('/member-create', [MemberController::class, 'store']);
+    Route::post('/member-delete', [MemberController::class, 'destroy']);
 });
 
 require __DIR__.'/auth.php';
