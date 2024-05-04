@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Club;
 use App\Models\Forum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ForumController extends Controller
 {
@@ -15,7 +16,7 @@ class ForumController extends Controller
     {
 
         $clubList = Club::all();
-        $questionList = Forum::all()->where('isQuestion',1)->where('clubAlias',$clubAlias);
+        $questionList = Forum::all()->where('isQuestion',1)->where('clubAlias',$clubAlias)->sortByDesc('created_at');
         return view('club.forum', compact('clubList','questionList','clubAlias'));
     }
     public function details($clubAlias,$questionId)
@@ -29,9 +30,51 @@ class ForumController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $Forum = new Forum();
+        $Forum->isQuestion = true;
+        $Forum->questionTitle = $request['questionTitle'];
+        $Forum->questionDetails = $request['questionDetails'];
+
+        if($request->hasFile('questionAttachment')){
+            $folder = "forum/attachments";
+            $file = $request->file('questionAttachment');
+            $path = Storage::disk('public_uploads')->put($folder, $file);
+            if(!isset($path)) {
+                return false;
+            }
+            $Forum->questionAttachment = "public/uploads/".$path;
+        }
+
+        $Forum->clubAlias = $request['clubAlias'];
+        $Forum->userId = $request['userId'];
+
+        $Forum->save();
+        return redirect()->back()->with('Success', 'Question created successfully!');
+    }
+
+    public function reply($clubAlias, Request $request)
+    {
+        $Forum = new Forum();
+        $Forum->parentQuestionId = $request['parentQuestionId'];
+        $Forum->questionDetails = $request['questionDetails'];
+
+        if($request->hasFile('questionAttachment')){
+            $folder = "forum/attachments";
+            $file = $request->file('questionAttachment');
+            $path = Storage::disk('public_uploads')->put($folder, $file);
+            if(!isset($path)) {
+                return false;
+            }
+            $Forum->questionAttachment = "public/uploads/".$path;
+        }
+
+        $Forum->clubAlias = $clubAlias;
+        $Forum->userId = $request['userId'];
+
+        $Forum->save();
+        return redirect()->back()->with('Success', 'Reply created successfully!');
     }
 
     /**

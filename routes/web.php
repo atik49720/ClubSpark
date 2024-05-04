@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/club-delete', [ClubController::class, 'destroy']);
 
     Route::get('/club-forum/{clubAlias}', [ForumController::class, 'index']);
+    Route::post('/club-forum/create-question', [ForumController::class, 'create']);
     Route::get('/club-forum/{clubAlias}/{questionId}', [ForumController::class, 'details']);
+    Route::post('/club-forum/{clubAlias}/create-reply', [ForumController::class, 'reply']);
 
     Route::get('/member-list', [MemberController::class, 'list']);
     Route::post('/member-create', [MemberController::class, 'store']);
