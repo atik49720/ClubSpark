@@ -37,6 +37,19 @@
         modal.style.display = "none";
     }
 </script>
+<script>
+
+    if({{Session::has('alert')}}){
+        var msg = '{{Session::get('alert')}}';
+        Swal.fire({
+            position: "top-end",
+            icon: 'swal2-icon-hide',
+            title: msg,
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
+</script>
 <script src="{{asset('public/assets/static/js/components/dark.js')}}"></script>
 <script src="{{asset('public/assets/static/js/pages/horizontal-layout.js')}}"></script>
 <script src="{{asset('public/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>

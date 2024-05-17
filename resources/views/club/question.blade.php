@@ -221,7 +221,9 @@
                                                             <p class="mb-0">{{ $question['questionDetails'] }}</p>
                                                         </div>
                                                     </div>
-                                                    <img id="myImg" src="{{asset($question['questionAttachment'])}}" alt="{{$question['questionTitle']}}" style="width:100%;max-width:400px">
+                                                    @if(isset($question['questionAttachment']))
+                                                        <img id="myImg" src="{{asset($question['questionAttachment'])}}" alt="{{$question['questionTitle']}}" style="width:100%;max-width:400px">
+                                                    @endif
                                                 </div>
                                                 <div class="card-body pt-7 bg-grey">
                                                     <div class="chat-content">
@@ -229,8 +231,12 @@
                                                             @if(auth()->user()->id != $reply['userId'])
                                                             <div class="chat chat-left">
                                                                 <div class="chat-body">
-                                                                    <div class="chat-message">{{$reply['questionDetails']}}</div>
-                                                                    <img id="myImg" src="{{asset($reply['questionAttachment'])}}" alt="{{$reply['questionTitle']}}" style="width:100%;max-width:400px">
+                                                                    <div class="chat-message">
+                                                                        <p>{{$reply['questionDetails']}}</p>
+                                                                        @if($reply['questionAttachment'])
+                                                                            <img id="myImg" src="{{asset($reply['questionAttachment'])}}" alt="{{$reply['questionTitle']}}" style="width:100%;max-width:400px">
+                                                                        @endif
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             @else
@@ -238,7 +244,9 @@
                                                                 <div class="chat-body">
                                                                     <div class="chat-message">
                                                                         <p>{{$reply['questionDetails']}}</p>
-                                                                        <img id="myImg" src="{{asset($reply['questionAttachment'])}}" alt="{{$reply['questionTitle']}}" style="width:100%;max-width:400px">
+                                                                        @if($reply['questionAttachment'])
+                                                                            <img id="myImg" src="{{asset($reply['questionAttachment'])}}" alt="{{$reply['questionTitle']}}" style="width:100%;max-width:400px">
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -263,7 +271,7 @@
                                                                 </label>
                                                             </div>
                                                             <div class="d-flex flex-grow-1 ms-4">
-                                                                <input type="text" name="questionDetails" class="form-control" placeholder="Type your message..">
+                                                                <input type="text" name="questionDetails" class="form-control" placeholder="Type your message.." required>
                                                             </div>&nbsp;&nbsp;
                                                             <input type="hidden" name="parentQuestionId" value="{{ $question['id'] }}">
                                                             <input type="hidden" name="userId" value="{{ auth()->user()->id }}">

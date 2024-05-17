@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId');
-            $table->string('username');
-            $table->integer('mobile');
             $table->string('email');
+            $table->integer('memberType')->default(1);
+            $table->integer('studentId');
+            $table->integer('mobile');
             $table->integer('batch');
             $table->string('dept');
             $table->boolean('isApproved')->default(0);

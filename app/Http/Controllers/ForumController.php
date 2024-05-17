@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Club;
 use App\Models\Forum;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,6 +15,10 @@ class ForumController extends Controller
      */
     public function index($clubAlias)
     {
+        $loggedInUser = Member::all()->where('email',auth()->user()->email);
+        if($loggedInUser->isApproved = false){
+            return redirect()->back()->with('alert', 'Your account is not approved');
+        }
 
         $clubList = Club::all();
         $questionList = Forum::all()->where('isQuestion',1)->where('clubAlias',$clubAlias)->sortByDesc('created_at');
@@ -23,8 +28,12 @@ class ForumController extends Controller
     {
         $clubList = Club::all();
         $question = Forum::all()->where('id',$questionId)->where('clubAlias',$clubAlias)->first();
-        $replies = Forum::all()->where('parentQuestionId',$questionId)->where('clubAlias',$clubAlias);
-        return view('club.question', compact('clubList','question','replies','clubAlias'));
+        if(isset($question))
+        {
+            $replies = Forum::all()->where('parentQuestionId',$questionId)->where('clubAlias',$clubAlias);
+            return view('club.question', compact('clubList','question','replies','clubAlias'));
+        }
+        return redirect()->back()->with('alert', 'Question not found.');
     }
 
     /**
@@ -32,6 +41,9 @@ class ForumController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'questionAttachment' => 'max:10240'
+        ]);
         $Forum = new Forum();
         $Forum->isQuestion = true;
         $Forum->questionTitle = $request['questionTitle'];
@@ -51,7 +63,7 @@ class ForumController extends Controller
         $Forum->userId = $request['userId'];
 
         $Forum->save();
-        return redirect()->back()->with('Success', 'Question created successfully!');
+        return redirect()->back()->with('alert', 'Question created successfully!');
     }
 
     public function reply($clubAlias, Request $request)
@@ -74,7 +86,7 @@ class ForumController extends Controller
         $Forum->userId = $request['userId'];
 
         $Forum->save();
-        return redirect()->back()->with('Success', 'Reply created successfully!');
+        return redirect()->back()->with('alert', 'Reply created successfully!');
     }
 
     /**

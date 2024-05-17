@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="{{asset('public/assets/compiled/css/app.css')}}">
     <link rel="stylesheet" href="{{asset('public/assets/compiled/css/app-dark.css')}}">
     <link rel="stylesheet" href="{{asset('public/assets/compiled/css/iconly.css')}}">
+
+    <script src="{{asset('public/assets/custom/js/sweetalert2@11.js')}}"></script>
+
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -146,7 +149,7 @@
                                         <h6 class="user-dropdown-name">
                                             {{auth()->user()->name}}
                                         </h6>
-                                        <p class="user-dropdown-status text-sm text-muted">Member</p>
+                                        <!--<p class="user-dropdown-status text-sm text-muted">Member</p>-->
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
@@ -200,6 +203,7 @@
                             </li>
 
                             @if(isset(auth()->user()->id))
+                                @if(auth()->user()->id == 1)
                                 <li
                                     class="menu-item  ">
                                     <a href="{{ route('dashboard') }}" class='menu-link'>
@@ -236,8 +240,8 @@
                                         </div>
                                     </div>
                                 </li>
+                                @endif
                             @endif
-
                         </ul>
                     </div>
                 </nav>
