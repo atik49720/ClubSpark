@@ -80,7 +80,7 @@ class ClubController extends Controller
         $Club->createdBy = auth()->user()->id;
         $Club->updatedBy = auth()->user()->id;
         $Club->save();
-        return redirect()->back()->with('Success', 'Club created successfully!');
+        return redirect()->back()->with('alert', 'Club created successfully!');
     }
 
     /**
@@ -136,6 +136,6 @@ class ClubController extends Controller
     public function destroy(Request $request)
     {
         Club::where('id', $request['id'])->delete();
-        return redirect()->back()->with('success', 'Club deleted successfully!');
+        return redirect()->back()->with('alert', 'Club deleted successfully!');
     }
 }

@@ -116,14 +116,14 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>SL</th>
-                            <th>User ID</th>
-                            <th>Mobile</th>
                             <th>Email</th>
+                            <th>Student ID</th>
+                            <th>Mobile</th>
                             <th>Batch</th>
                             <th>Dept</th>
                             <th>Approved?</th>
-                            <th>Updated At</th>
-                            <th>Action</th>
+                            <th>Approved At</th>
+                            <th colspan="2">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -131,13 +131,38 @@
                         @foreach($results as $result)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $result['userId'] }}</td>
-                                <td>{{ $result['mobile'] }}</td>
                                 <td>{{ $result['email'] }}</td>
+                                <td>{{ $result['studentId'] }}</td>
+                                <td>{{ $result['mobile'] }}</td>
                                 <td>{{ $result['batch'] }}</td>
                                 <td>{{ $result['dept'] }}</td>
-                                <td>{{ $result['isApproved'] }}</td>
-                                <td>{{ $result['updated_at'] }}</td>
+                                <td>
+                                    @if($result['isApproved'])
+                                        Yes
+                                    @else
+                                        No
+                                    @endif
+                                </td>
+                                <td>{{ $result['approvedAt'] }}</td>
+                                <td>
+                                    @if($result['memberType'] == 2)
+                                        <button class="btn btn-primary">Super Admin</button>
+                                    @else
+                                        @if($result['isApproved'])
+                                            <form method="POST" action="./member-unapprove">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$result['id']}}">
+                                                <button class="btn btn-danger" type="submit">Unapprove</button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="./member-approve">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$result['id']}}">
+                                                <button class="btn btn-primary" type="submit">Approve</button>
+                                            </form>
+                                        @endif
+                                    @endif
+                                </td>
                                 <td>
                                     <form method="POST" action="./member-delete">
                                         @csrf

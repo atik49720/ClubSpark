@@ -77,11 +77,11 @@
                                 <div class="card-body pt-0">
                                     <div class="form-label-group">
                                         <label for="questionTitle">Title</label>
-                                        <input type="text" id="questionTitle" name="questionTitle" class="form-control" placeholder="Title">
+                                        <input type="text" id="questionTitle" name="questionTitle" class="form-control" placeholder="Title" required>
                                     </div>
                                     <br>
                                     <label for="questionDetails">Details</label>
-                                    <textarea id="questionDetails" name="questionDetails" class="form-control" rows="4"></textarea>
+                                    <textarea id="questionDetails" name="questionDetails" class="form-control" rows="4" required></textarea>
                                     <br>
                                     <!-- Compose mail Quill editor -->
                                     <div class="form-group mt-2">

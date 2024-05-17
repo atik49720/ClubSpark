@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -32,6 +33,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'studentId' => ['required', 'integer'],
+            'batch' => ['required', 'integer', 'max:100'],
+            'dept' => ['required', 'string', 'max:5'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -41,6 +45,14 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $Member = new Member();
+        $Member->email = $request['email'];
+        $Member->studentId = $request['studentId'];
+        $Member->mobile = $request['mobile'];
+        $Member->batch = $request['batch'];
+        $Member->dept = $request['dept'];
+        $Member->save();
 
         event(new Registered($user));
 

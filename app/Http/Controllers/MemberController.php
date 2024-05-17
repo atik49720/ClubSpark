@@ -23,6 +23,27 @@ class MemberController extends Controller
 
         return view('member.list', compact('results'));
     }
+
+    public function approve(Request $request)
+    {
+        $memberDetails = Member::all()->where('id',$request['id'])->first();
+        $memberDetails->isApproved = true;
+        $memberDetails->approvedBy = auth()->user()->id;
+        $memberDetails->approvedAt = date('Y-m-d H:i:s' );
+        $memberDetails->save();
+
+        return redirect()->back()->with('alert', 'Member approved successfully!');
+    }
+    public function unapprove(Request $request)
+    {
+        $memberDetails = Member::all()->where('id',$request['id'])->first();
+        $memberDetails->isApproved = false;
+        $memberDetails->approvedBy = NULL;
+        $memberDetails->approvedAt = NULL;
+        $memberDetails->save();
+
+        return redirect()->back()->with('alert', 'Member unapproved successfully!');
+    }
     public function login(Request $request)
     {
         $results = Member::all()->where('username',$request['username'])->first();
@@ -31,10 +52,8 @@ class MemberController extends Controller
             if($request['password'] == $results->password){
                 return redirect('./member-dashboard');
             }
-
         }
         return redirect('./');
-
     }
 
     /**
@@ -97,6 +116,6 @@ class MemberController extends Controller
     public function destroy(Request $request)
     {
         Member::where('id', $request['id'])->delete();
-        return redirect()->back()->with('success', 'Member deleted successfully!');
+        return redirect()->back()->with('alert', 'Member deleted successfully!');
     }
 }

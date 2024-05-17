@@ -20,6 +20,46 @@
                                 </div>
                             </div>
 
+                            <!-- Student ID -->
+                            <div class="form-group">
+                                <div class="position-relative">
+                                    <x-input-label for="studentId" :value="__('Student ID')"/>
+                                    <x-text-input id="studentId" class="form-control" type="text" name="studentId" :value="old('studentId')" required autofocus autocomplete="studentId" />
+                                    <x-input-error :messages="$errors->get('studentId')" class="mt-2" />
+                                </div>
+                            </div>
+
+                            <!-- Mobile -->
+                            <div class="form-group">
+                                <div class="position-relative">
+                                    <x-input-label for="mobile" :value="__('Mobile')"/>
+                                    <x-text-input id="mobile" class="form-control" type="number" name="mobile" :value="old('mobile')" required autofocus autocomplete="mobile" />
+                                    <x-input-error :messages="$errors->get('mobile')" class="mt-2" />
+                                </div>
+                            </div>
+
+                            <!-- Batch -->
+                            <div class="form-group">
+                                <div class="position-relative">
+                                    <x-input-label for="batch" :value="__('Batch')"/>
+                                    <x-text-input id="batch" class="form-control" type="number" max="100" name="batch" :value="old('batch')" required autofocus autocomplete="batch" />
+                                    <x-input-error :messages="$errors->get('batch')" class="mt-2" />
+                                </div>
+                            </div>
+
+                            <!-- Dept -->
+                            <div class="form-group">
+                                <div class="position-relative">
+                                    <x-input-label for="dept" :value="__('Department')"/>
+                                    <select id="dept" class="form-control" name="dept" :value="old('dept')" required autofocus autocomplete="dept">
+                                        <option>Select Option</option>
+                                        <option value="CSE">CSE</option>
+                                        <option value="EEE">EEE</option>
+                                    </select>
+                                    <x-input-error :messages="$errors->get('dept')" class="mt-2" />
+                                </div>
+                            </div>
+
                             <!-- Email Address -->
                             <div class="form-group">
                                 <div class="position-relative">
