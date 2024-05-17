@@ -271,7 +271,6 @@
                                                                 </label>
                                                             </div>
                                                             <div class="d-flex flex-grow-1 ms-4">
-                                                                <input type="text" name="questionDetails" class="form-control" placeholder="Type your message..">
                                                                 <input type="text" name="questionDetails" class="form-control" placeholder="Type your message.." required>
                                                             </div>&nbsp;&nbsp;
                                                             <input type="hidden" name="parentQuestionId" value="{{ $question['id'] }}">
